@@ -1,4 +1,4 @@
-# Configures a web server for deployment of web_static.
+# Sets up a web server for deployment of web_static.
 
 # Nginx configuration file
 $nginx_conf = "server {
@@ -29,6 +29,7 @@ package { 'nginx':
   provider => 'apt'
 } ->
 
+
 file { '/data':
   ensure  => 'directory'
 } ->
@@ -45,6 +46,7 @@ file { '/data/web_static/releases/test':
   ensure => 'directory'
 } ->
 
+
 file { '/data/web_static/shared':
   ensure => 'directory'
 } ->
@@ -59,6 +61,7 @@ file { '/data/web_static/current':
   target => '/data/web_static/releases/test'
 } ->
 
+
 exec { 'chown -R ubuntu:ubuntu /data/':
   path => '/usr/bin/:/usr/local/bin/:/bin/'
 }
@@ -70,6 +73,7 @@ file { '/var/www':
 file { '/var/www/html':
   ensure => 'directory'
 } ->
+
 
 file { '/var/www/html/index.html':
   ensure  => 'present',
@@ -85,6 +89,7 @@ file { '/etc/nginx/sites-available/default':
   ensure  => 'present',
   content => $nginx_conf
 } ->
+
 
 exec { 'nginx restart':
   path => '/etc/init.d/'

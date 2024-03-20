@@ -1,7 +1,9 @@
 #!/usr/bin/python3
-from fabric.api import *
+
 from datetime import datetime
+from fabric.api import *
 import os
+
 
 env.hosts = ['3.238.28.101', '3.209.82.116']
 env.user = 'ubuntu'
@@ -11,6 +13,7 @@ def do_pack():
     """ fabric script that generates a .tgz """
     date = datetime.now().strftime("%Y%m%d%H%M%S")
     path = "versions/web_static_{}.tgz".format(date)
+
     try:
         local("mkdir -p versions")
         local("tar -czvf {} web_static".format(path))
@@ -36,6 +39,7 @@ def do_deploy(archive_path):
         run("mkdir -p {}".format(newpath))
         run("tar -xzf /tmp/{} -C {}".format(filename, newpath))
         run("rm /tmp/{}".format(filename))
+
         run("mv {}web_static/* {}".format(newpath, newpath))
         run("rm -rf {}web_static".format(newpath))
         run("rm -rf /data/web_static/current")

@@ -6,11 +6,11 @@ import cmd
 import shlex
 import models
 from models.amenity import Amenity
+from models.state import State
+from models.review import Review
+from models.user import User
 from models.base_model import BaseModel
 from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
 
 classes = {
     "BaseModel": BaseModel,
@@ -23,7 +23,7 @@ classes = {
 
 
 class HBNBCommand(cmd.Cmd):
-    """An entry point for the airbnb clone HBNB CLI"""
+    """Entry point for the airbnb clone HBNB CLI"""
 
     prompt = "(hbnb) "
 
@@ -35,13 +35,14 @@ class HBNBCommand(cmd.Cmd):
         """Exits the console"""
         return True
 
+
     def emptyline(self):
         """overite/skip the emptyline method"""
         return False
 
     def _key_value_parser(self, args):
         """creates a dictionary from a list of strings"""
-        new_dict = {}
+        fresh_dict = {}
         for arg in args:
             if "=" in arg:
                 kvp = arg.split("=", 1)
@@ -57,20 +58,21 @@ class HBNBCommand(cmd.Cmd):
                             value = float(value)
                         except:
                             continue
-                new_dict[key] = value
-        return new_dict
+                fresh_dict[key] = value
+        return fresh_dict
 
     def do_create(self, arg):
         """Usage: create <class> <key 1>=<value 2> <key 2>=<value 2> ...
-        Create a new class instance with given keys/values and print its id.
+        Makes a new class instance with given keys/values and print its id.
         """
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
             return False
+
         if args[0] in classes:
-            new_dict = self._key_value_parser(args[1:])
-            instance = classes[args[0]](**new_dict)
+            fresh_dict = self._key_value_parser(args[1:])
+            instance = classes[args[0]](**fresh_dict)
             models.storage.new(instance)
             models.storage.save()
         else:
@@ -82,7 +84,6 @@ class HBNBCommand(cmd.Cmd):
         """
         Prints the string representation of an instance
         based on the class name and id.
-        Ex: $ show BaseModel 1234-1234-1234.
         """
         args = shlex.split(arg)
         if len(arg) == 0:
@@ -104,7 +105,6 @@ class HBNBCommand(cmd.Cmd):
         """
         Delets an instance base on the class name and id
         saves changes in a JSON file.
-        Ex: $ destroy BaseModel 1234-1234-1234
         """
         args = shlex.split(arg)
         if len(args) == 0:

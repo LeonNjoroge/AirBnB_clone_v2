@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 from fabric.api import *
 
 env.hosts = ["3.238.28.101", "3.209.82.116"]
@@ -9,6 +10,7 @@ def do_clean(number=0):
 
     number = int(number)
     command = "cd /data/web_static/releases; ls | head -n -{} | xargs rm -rf"
+
     if number == 1 or number == 0:
         local("cd versions; ls | head -n -1 | xargs rm -rf")
         run("cd /data/web_static/releases; ls | head -n -1 | xargs rm -rf")
