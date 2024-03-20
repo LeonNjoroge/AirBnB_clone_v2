@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-"""Starts a Flask web application.
+"""Beings a Flask web application.
 The application listens on 0.0.0.0, port 5000.
+
 Routes:
     /: Displays 'Hello HBNB!'
     /hbnb: Displays 'HBNB'
@@ -37,6 +38,7 @@ def c_text(text):
 @app.route("/python/", strict_slashes=False)
 def python_text(text="is cool"):
     """Displays 'Python' followed by the value of the text variable"""
+
     return "Python {}".format(text.replace("_", " "))
 
 
@@ -44,6 +46,7 @@ def python_text(text="is cool"):
 def number_n(n):
     """Displays 'n is a number' only if n is an integer"""
     return "{} is a number".format(n)
+
 
 
 @app.route("/number_template/<int:n>", strict_slashes=False)
