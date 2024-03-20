@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" 
+"""
 Tests delete feature
 """
 from models.engine.file_storage import FileStorage
@@ -40,7 +40,7 @@ print("Another State: {}".format(another_state))
 all_states = file_stg.all(State)
 print("All States: {}".format(len(all_states.keys())))
 for state_key in all_states.keys():
-    print(all_states[state_key])        
+    print(all_states[state_key])
 
 # Deletes the new State
 file_stg.delete(new_state)

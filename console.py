@@ -35,7 +35,6 @@ class HBNBCommand(cmd.Cmd):
         """Exits the console"""
         return True
 
-
     def emptyline(self):
         """overite/skip the emptyline method"""
         return False
